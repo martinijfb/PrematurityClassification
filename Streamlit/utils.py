@@ -7,6 +7,7 @@ import pandas as pd
 import streamlit as st
 from cryptography.fernet import Fernet
 
+
 # Function to load and decrypt data
 @st.cache_data
 def load_data():
@@ -28,6 +29,7 @@ def load_data():
 
     return matrices, subject_info
 
+
 @st.cache_data
 def generate_matrix_figure(matrices, i):
     fig = plt.figure(figsize=(5, 5))
@@ -36,6 +38,7 @@ def generate_matrix_figure(matrices, i):
     plt.title(f"Matrix {i + 1}")
     return fig
 
+
 @st.cache_resource
 def load_model():
     # Load model
@@ -43,27 +46,29 @@ def load_model():
         model = pickle.load(file)
     return model
 
+
 @st.cache_data
 def preprocess_data(matrices, subject_info):
     n = matrices.shape[0]  # number of matrices
-    m = matrices.shape[1] # number of rows/columns in each matrix
-    D = round(m*(m-1)/2) # length of feature vector
+    m = matrices.shape[1]  # number of rows/columns in each matrix
+    D = round(m * (m - 1) / 2)  # length of feature vector
 
     # feature matrix from upper triangular part
-    X=np.zeros([n,D])
+    X = np.zeros([n, D])
     for i in range(n):
-        index=0
+        index = 0
         for j in range(m):
             for k in range(j):
-                X[i,index] = matrices[i,j,k]
+                X[i, index] = matrices[i, j, k]
                 index += 1
-    
+
     # add subject info
     df = pd.concat([subject_info, pd.DataFrame(X)], axis=1)
     X = df.drop(columns=["prematurity"])
-    y = df['prematurity']
+    y = df["prematurity"]
 
     return X, y
+
 
 @st.cache_data
 def predict_prematurity(_model, X, y, i):
