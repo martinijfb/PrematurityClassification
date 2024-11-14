@@ -5,6 +5,9 @@ from utils import (
     load_model,
     preprocess_data,
     predict_prematurity,
+    visualise_pca,
+    visualise_tsne,
+    visualise_umap,
 )
 
 
@@ -12,11 +15,11 @@ def main():
     # Load data
     matrices, subject_info = load_data()
 
-    # Load model
-    model = load_model()
-
     # Prepare data
     X, y = preprocess_data(matrices, subject_info)
+
+    # Load model
+    model = load_model()
 
     st.title("Prematurity Prediction Based on Brain Connectivity Matrices")
     st.divider()
@@ -24,7 +27,38 @@ def main():
     st.divider()
     understand_prematurity()
     st.divider()
-    plot_and_predict(matrices, model, X, y)
+
+    tab1, tab2 = st.tabs(["Predict Prematurity", "Visualise Data"])
+    with tab1:
+        plot_and_predict(matrices, model, X, y)
+    with tab2:
+        visualisaton_section(X, y)
+
+
+def visualisation_info():
+    st.write(
+        """
+    - **PCA (Principal Component Analysis)**: A linear dimensionality reduction technique that projects data onto a lower-dimensional space to maximize variance. Useful for gaining insights while preserving global structure.
+    - **t-SNE (t-Distributed Stochastic Neighbor Embedding)**: A non-linear technique that emphasizes local structure, effectively clustering similar points together but may distort global structure. Good for visualizing clusters.
+    - **UMAP (Uniform Manifold Approximation and Projection)**: Another non-linear method that preserves both local and some global structure, providing a balance between clustering and data spread. Useful for capturing more complex relationships in high-dimensional data.
+    """
+    )
+
+
+def choose_visualisation(X, y):
+    visualisation = st.selectbox("Select a visualisation", ["PCA", "t-SNE", "UMAP"])
+    if visualisation == "PCA":
+        return visualise_pca(X, y)
+    elif visualisation == "t-SNE":
+        return visualise_tsne(X, y)
+    elif visualisation == "UMAP":
+        return visualise_umap(X, y)
+
+
+def visualisaton_section(X, y):
+    st.subheader("Visualisation of the data")
+    st.pyplot(choose_visualisation(X, y))
+    visualisation_info()
 
 
 def project_description():

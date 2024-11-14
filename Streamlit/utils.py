@@ -6,6 +6,10 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 from cryptography.fernet import Fernet
+import seaborn as sns
+import umap.umap_ as umap
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
 
 
 # Function to load and decrypt data
@@ -74,3 +78,48 @@ def preprocess_data(matrices, subject_info):
 def predict_prematurity(_model, X, y, i):
     prediction = _model.predict(X.iloc[i].values.reshape(1, -1))
     return prediction[0], y.iloc[i]
+
+
+@st.cache_data
+def visualise_pca(X, y):
+    pca = PCA(n_components=2)
+    X_pca = pca.fit_transform(X.to_numpy())
+
+    fig = plt.figure(figsize=(8, 5))
+    sns.scatterplot(x=X_pca[:, 0], y=X_pca[:, 1], hue=y, palette="bwr")
+    plt.title("PCA of the data")
+    plt.xlabel("Principal Component 1")
+    plt.ylabel("Principal Component 2")
+    plt.legend(title="Prematurity")
+
+    return fig
+
+
+@st.cache_data
+def visualise_tsne(X, y):
+    tsne = TSNE(n_components=2, random_state=42)
+    X_tsne = tsne.fit_transform(X.to_numpy())
+
+    fig = plt.figure(figsize=(8, 5))
+    sns.scatterplot(x=X_tsne[:, 0], y=X_tsne[:, 1], hue=y, palette="bwr")
+    plt.title("t-SNE of the data")
+    plt.xlabel("t-SNE Component 1")
+    plt.ylabel("t-SNE Component 2")
+    plt.legend(title="Prematurity")
+
+    return fig
+
+
+@st.cache_data
+def visualise_umap(X, y):
+    umap_model = umap.UMAP()
+    X_umap = umap_model.fit_transform(X.to_numpy())
+
+    fig = plt.figure(figsize=(8, 5))
+    sns.scatterplot(x=X_umap[:, 0], y=X_umap[:, 1], hue=y, palette="bwr")
+    plt.title("UMAP of the data")
+    plt.xlabel("UMAP Component 1")
+    plt.ylabel("UMAP Component 2")
+    plt.legend(title="Prematurity")
+
+    return fig
