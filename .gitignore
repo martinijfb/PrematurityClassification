@@ -3,3 +3,28 @@ Encryption/
 matrices.p
 label_names.csv
 subject_info.csv
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# PyCharm or other IDE-specific files
+.idea/
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Log files
+*.log
+*.out
+*.err
