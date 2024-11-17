@@ -6,6 +6,7 @@ import numpy as np
 from cryptography.fernet import Fernet
 import streamlit as st
 
+
 @st.cache_data
 def load_data():
     # Load encryption key
@@ -25,6 +26,7 @@ def load_data():
     subject_info = pd.read_csv(BytesIO(decrypted_data))
 
     return matrices, subject_info
+
 
 @st.cache_data
 def preprocess_data(matrices, subject_info):

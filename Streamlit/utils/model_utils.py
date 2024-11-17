@@ -8,12 +8,14 @@ from sklearn.metrics import (
 )
 import streamlit as st
 
+
 @st.cache_resource
 def load_model():
     # Load model
     with open("DATA/model_2_lr_with_pca.p", "rb") as file:
         model = pickle.load(file)
     return model
+
 
 @st.cache_data
 def evaluation(_model, X, y, mode="Test"):
@@ -38,6 +40,7 @@ def evaluation(_model, X, y, mode="Test"):
         f"{mode} F1 Score": round(f1_score(ground_truth, y_pred), 2),
     }
     return metrics
+
 
 @st.cache_data
 def predict_prematurity(_model, X, y, i):
