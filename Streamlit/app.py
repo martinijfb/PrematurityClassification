@@ -1,17 +1,14 @@
-import streamlit as st
-from utils import (
-    evaluation,
-    load_data,
+from utils.data_utils import load_data, preprocess_data
+from utils.model_utils import load_model, evaluation, predict_prematurity
+from utils.visualisation_utils import (
     generate_matrix_figure,
-    load_model,
-    preprocess_data,
-    predict_prematurity,
+    plot_confusion_matrices,
     visualise_pca,
     visualise_tsne,
     visualise_umap,
     visualise_data_counts,
-    plot_confusion_matrices,
 )
+import streamlit as st
 
 
 def main():

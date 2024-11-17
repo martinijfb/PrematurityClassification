@@ -26,6 +26,7 @@ aws-crt-cpp=0.18.16=h313beb8_0
 aws-sdk-cpp=1.10.55=h313beb8_0
 babel=2.11.0=py311hca03da5_0
 beautifulsoup4=4.12.3=py311hca03da5_0
+black=24.10.0=pypi_0
 blas=1.0=openblas
 bleach=4.1.0=pyhd3eb1b0_0
 blinker=1.6.2=py311hca03da5_0
@@ -121,6 +122,7 @@ matplotlib-base=3.9.2=py311hecf7826_0
 matplotlib-inline=0.1.6=py311hca03da5_0
 mdurl=0.1.0=py311hca03da5_0
 mistune=2.0.4=py311hca03da5_0
+mypy-extensions=1.0.0=pypi_0
 nbclient=0.8.0=py311hca03da5_0
 nbconvert=7.16.4=py311hca03da5_0
 nbformat=5.10.4=py311hca03da5_0
@@ -140,6 +142,7 @@ packaging=24.1=py311hca03da5_0
 pandas=2.2.2=py311h7aedaa7_0
 pandocfilters=1.5.0=pyhd3eb1b0_0
 parso=0.8.3=pyhd3eb1b0_0
+pathspec=0.12.1=pypi_0
 pexpect=4.8.0=pyhd3eb1b0_3
 pillow=10.4.0=py311h80987f9_0
 pip=24.2=py311hca03da5_0
@@ -207,6 +210,7 @@ umap-learn=0.5.7=pypi_0
 unicodedata2=15.1.0=py311h80987f9_0
 urllib3=2.2.3=py311hca03da5_0
 utf8proc=2.6.1=h80987f9_1
+watchdog=6.0.0=pypi_0
 wcwidth=0.2.5=pyhd3eb1b0_0
 webencodings=0.5.1=py311hca03da5_1
 websocket-client=1.8.0=py311hca03da5_0
